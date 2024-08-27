@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        ご飯どこ行こっかな？
+    </title>
+</head>
+
+<body>
+    <h1>
+        今日のご飯はどこにする？
+    </h1>
+    <form method="post" th:action="@{/dinner_form}">
+        <input type="submit"  value="決める！"></input>
+    </form>
+</body>
+</html>
