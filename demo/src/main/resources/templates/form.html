@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        ご飯どこ行こっかな？_form
+    </title>
+</head>
+
+<body>
+<h1>
+    今日のご飯はどこにする？
+</h1><br>
+<form method="post" th:action="@{/RouletteDinner_res}">
+    どこの地域？<input type="text" name="area" >
+    <!--地域をどう絞れるかはAPI次第
+        あと何を情報として絞れるのかも気になったり-->
+    <br><br>
+    <input type="submit" value="ルーレット!!">
+</form>
+</body>
+</html>

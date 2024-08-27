@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        ご飯どこ行こっかな？_home
+    </title>
+</head>
+
+<body>
+<h1>
+    今日のご飯はどこにする？
+</h1>
+<form method="get" th:action="@{/RouletteDinner_form}">
+    <input type="submit"  value="決める！"></input>
+</form>
+</body>
+</html>
