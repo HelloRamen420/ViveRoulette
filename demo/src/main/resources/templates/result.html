@@ -3,16 +3,22 @@
 <head>
     <title>ご飯どこ行こっかな_res</title>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
 </head>
+
+<body background="/Users/nakamurayuusuke/Desktop/pakutexture24_TP_V.jpg">
+    <div style="text-align:center">
 <body>
     <h1>
+        <br><br>
         今日のご飯はここだ!!
     </h1>
-    <!--ここは消すとこ、実行操作のためのやつ-->
+    <br>
     <p th:text="${pref}"></p>
     <p th:text="${area}"></p>
     <!--API次第
         なんの情報を得れて、なおかつ実装できるかってのが大事っすね〜-->
     <br><br><a href="http://webservice.recruit.co.jp/"><img src="http://webservice.recruit.co.jp/banner/hotpepper-s.gif" alt="ホットペッパーグルメ Webサービス" width="135" height="17"  title="ホットペッパーグルメ Webサービス"></a>
+</div>
 </body>
 </html>
