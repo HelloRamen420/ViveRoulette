@@ -16,6 +16,7 @@ import okhttp3.Response;
 
 @Controller
 public class HomeController{
+    final static String NULLMESS="必要な情報を入力してください";
 
     @GetMapping("/RouletteDinner_home")    //一番最初に起動するやつ
     public String start(){
@@ -29,6 +30,11 @@ public class HomeController{
 
     @PostMapping("/RouletteDinner_res")
     public ModelAndView result(ModelAndView mav ,@RequestParam String area) throws IOException{
+        if(area.isEmpty()){ //空文字の時の処理
+            mav.addObject("nullMes",NULLMESS);  //実際にはnullではなく空文字
+            mav.setViewName("form");
+            return mav;
+        }
         OkHttpClient client = new OkHttpClient();
         ObjectMapper mapper = new ObjectMapper();
         JsonNode shopsNode =null;
