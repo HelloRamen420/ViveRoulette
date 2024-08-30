@@ -15,6 +15,7 @@
 </h1>
 <h2>
     <p>必要な情報を入力してね！</p>
+<<<<<<< HEAD
 <form method="post" th:action="@{/RouletteDinner_res}">
     どこの地域？<input type="text" name="area" >
     <!--地域をどう絞れるかはAPI次第
@@ -24,5 +25,64 @@
 </form>
 </h2>
 </div>
+=======
+    <h4 th:text="${nullMes}"></h4>
+    <form method="post" th:action="@{/RouletteDinner_res}">
+        都道府県は？  <select name="pref">
+                        <option>北海道</option>
+                        <option>青森県</option>
+                        <option>秋田県</option>
+                        <option>岩手県</option>
+                        <option>山形県</option>
+                        <option>福島県</option>
+                        <option>東京都</option>
+                        <option>千葉県</option>
+                        <option>神奈川県</option>
+                        <option>埼玉県</option>
+                        <option>群馬県</option>
+                        <option>栃木県</option>
+                        <option>茨城県</option>
+                        <option>山梨県</option>
+                        <option>静岡県</option>
+                        <option>愛知県</option>
+                        <option>長野県</option>
+                        <option>岐阜県</option>
+                        <option>新潟県</option>
+                        <option>富山県</option>
+                        <option>石川県</option>
+                        <option>福井県</option>
+                        <option>大阪県</option>
+                        <option>京都府</option>
+                        <option>兵庫県</option>
+                        <option>和歌山県</option>
+                        <option>奈良県</option>
+                        <option>三重県</option>
+                        <option>滋賀県</option>
+                        <option>岡山県</option>
+                        <option>広島県</option>
+                        <option>山口県</option>
+                        <option>鳥取県</option>
+                        <option>島根県</option>
+                        <option>愛媛県</option>
+                        <option>香川県</option>
+                        <option>高知県</option>
+                        <option>徳島県</option>
+                        <option>福岡県</option>
+                        <option>佐賀県</option>
+                        <option>長崎県</option>
+                        <option>大分県</option>
+                        <option>熊本県</option>
+                        <option>宮崎県</option>
+                        <option>鹿児島県</option>
+                        <option>沖縄県</option>
+                    </select><br>
+        どこの地域？<input type="text" name="area" >
+        <!--地域をどう絞れるかはAPI次第
+            あと何を情報として絞れるのかも気になったり-->
+        <br><br>
+        <input type="submit" value="ルーレット!!">
+    </form>
+    <br><br><a href="http://webservice.recruit.co.jp/"><img src="http://webservice.recruit.co.jp/banner/hotpepper-s.gif" alt="ホットペッパーグルメ Webサービス" width="135" height="17" border="0" title="ホットペッパーグルメ Webサービス"></a>
+>>>>>>> a553ba9f83f2bf656f285a01d11ce9a5753f278f
 </body>
 </html>
