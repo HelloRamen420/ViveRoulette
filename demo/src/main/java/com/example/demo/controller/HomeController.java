@@ -22,7 +22,8 @@ public class HomeController{
 
     @PostMapping("/RouletteDinner_res")
     public ModelAndView result(ModelAndView mav ,@RequestParam String area){
-        /*APIで何を取得できるかによってここの情報変わります。
+
+        /* APIで何を取得できるかによってここの情報変わります。
          * 地域だけは最低限ないといけないので実装してますが、まあAPI次第。*/
         mav.setViewName("result");
         return mav;
