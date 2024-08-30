@@ -6,13 +6,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import java.io.*;
-import java.util.*;
-import com.fasterxml.jackson.core.JsonProcessingException;
+
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 
 @Controller
 public class HomeController{
@@ -29,13 +24,13 @@ public class HomeController{
     }
 
     @PostMapping("/RouletteDinner_res")
-    public ModelAndView result(ModelAndView mav ,@RequestParam String area) throws Exception{
-        if(area.isEmpty()){ //空文字の時の処理
+    public ModelAndView result(ModelAndView mav ,@RequestParam String pref) throws Exception{
+        if(pref.isEmpty()){ //空文字の時の処理
             mav.addObject("nullMes",NULLMESS);  //実際にはnullではなく空文字
             mav.setViewName("form");
             return mav;
         }
-        JsonNode shopsNode = RandomController.kaesi(area);
+        JsonNode shopsNode = RandomController.kaesi(pref);
         String name = shopsNode.get("name").asText();
         String address = shopsNode.get("address").asText();
         mav.addObject("name", name);
