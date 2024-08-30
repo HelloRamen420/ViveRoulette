@@ -7,11 +7,14 @@
     </title>
 </head>
 
-<body>
+<body background="/Users/nakamurayuusuke/Desktop/pakutexture24_TP_V.jpg">
+    <div style="text-align:center">
 <h1>
+    <br><br><br><br>
     今日のご飯はどこにする？
 </h1>
-<p>必要な情報を入力してね！</p>
+<h2>
+    <p>必要な情報を入力してね！</p>
 <form method="post" th:action="@{/RouletteDinner_res}">
     どこの地域？<input type="text" name="area" >
     <!--地域をどう絞れるかはAPI次第
@@ -19,5 +22,7 @@
     <br><br>
     <input type="submit" value="ルーレット!!">
 </form>
+</h2>
+</div>
 </body>
 </html>
