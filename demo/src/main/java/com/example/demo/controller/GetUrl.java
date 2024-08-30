@@ -8,10 +8,4 @@ public class GetUrl {
         }
         return frag;
     }
-
-    public static String emptyCheck(String... str) {
-        if (str.isEmpty())
-            return "";
-        return str + "&";
-    }
 }
