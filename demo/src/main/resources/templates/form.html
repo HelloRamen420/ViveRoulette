@@ -8,16 +8,17 @@
 </head>
 
 <body>
-<h1>
-    今日のご飯はどこにする？
-</h1>
-<p>必要な情報を入力してね！</p>
-<form method="post" th:action="@{/RouletteDinner_res}">
-    どこの地域？<input type="text" name="area" >
-    <!--地域をどう絞れるかはAPI次第
-        あと何を情報として絞れるのかも気になったり-->
-    <br><br>
-    <input type="submit" value="ルーレット!!">
-</form>
+    <h1>
+        今日のご飯はどこにする？
+    </h1>
+    <p>必要な情報を入力してね！</p>
+    <form method="post" th:action="@{/RouletteDinner_res}">
+        どこの地域？<input type="text" name="area" >
+        <!--地域をどう絞れるかはAPI次第
+            あと何を情報として絞れるのかも気になったり-->
+        <br><br>
+        <input type="submit" value="ルーレット!!">
+    </form>
+    <a href="http://webservice.recruit.co.jp/"><img src="http://webservice.recruit.co.jp/banner/hotpepper-s.gif" alt="ホットペッパーグルメ Webサービス" width="135" height="17" border="0" title="ホットペッパーグルメ Webサービス"></a>
 </body>
 </html>
