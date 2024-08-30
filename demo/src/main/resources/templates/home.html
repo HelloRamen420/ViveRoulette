@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <title>
@@ -8,11 +9,14 @@
 </head>
 
 <body>
-<h1>
-    今日のご飯はどこにする？
-</h1>
-<form method="get" th:action="@{/RouletteDinner_form}">
-    <input type="submit"  value="決める！"></input>
-</form>
+    <h1>
+        今日のご飯はどこにする？
+    </h1>
+    <form method="get" th:action="@{/RouletteDinner_form}">
+        <input type="submit" value="決める！"></input>
+    </form>
+    <a href="http://webservice.recruit.co.jp/"><img src="http://webservice.recruit.co.jp/banner/hotpepper-s.gif"
+            alt="ホットペッパーグルメ Webサービス" width="135" height="17" border="0" title="ホットペッパーグルメ Webサービス"></a>
 </body>
+
 </html>
