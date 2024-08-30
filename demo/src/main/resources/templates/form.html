@@ -5,27 +5,15 @@
     <title>
         ご飯どこ行こっかな？_form
     </title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body background="/Users/nakamurayuusuke/Desktop/pakutexture24_TP_V.jpg">
     <div style="text-align:center">
 <h1>
-    <br><br><br><br>
+    <br><br>
     今日のご飯はどこにする？
 </h1>
-<h2>
-    <p>必要な情報を入力してね！</p>
-<<<<<<< HEAD
-<form method="post" th:action="@{/RouletteDinner_res}">
-    どこの地域？<input type="text" name="area" >
-    <!--地域をどう絞れるかはAPI次第
-        あと何を情報として絞れるのかも気になったり-->
-    <br><br>
-    <input type="submit" value="ルーレット!!">
-</form>
-</h2>
-</div>
-=======
     <h4 th:text="${nullMes}"></h4>
     <form method="post" th:action="@{/RouletteDinner_res}">
         都道府県は？  <select name="pref">
@@ -83,6 +71,6 @@
         <input type="submit" value="ルーレット!!">
     </form>
     <br><br><a href="http://webservice.recruit.co.jp/"><img src="http://webservice.recruit.co.jp/banner/hotpepper-s.gif" alt="ホットペッパーグルメ Webサービス" width="135" height="17" border="0" title="ホットペッパーグルメ Webサービス"></a>
->>>>>>> a553ba9f83f2bf656f285a01d11ce9a5753f278f
+</div>
 </body>
 </html>
