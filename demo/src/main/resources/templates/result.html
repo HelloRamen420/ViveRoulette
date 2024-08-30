@@ -4,13 +4,14 @@
     <title>ご飯どこ行こっかな_res</title>
     <meta charset="UTF-8">
 </head>
-
 <body>
     <h1>
         今日のご飯はここだ!!
     </h1>
+    <p th:text="${pref}"></p>
+    <p th:text="${area}"></p>
     <!--API次第
         なんの情報を得れて、なおかつ実装できるかってのが大事っすね〜-->
-    <a href="http://webservice.recruit.co.jp/"><img src="http://webservice.recruit.co.jp/banner/hotpepper-s.gif" alt="ホットペッパーグルメ Webサービス" width="135" height="17" border="0" title="ホットペッパーグルメ Webサービス"></a>
+    <br><br><a href="http://webservice.recruit.co.jp/"><img src="http://webservice.recruit.co.jp/banner/hotpepper-s.gif" alt="ホットペッパーグルメ Webサービス" width="135" height="17"  title="ホットペッパーグルメ Webサービス"></a>
 </body>
 </html>
