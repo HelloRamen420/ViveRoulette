@@ -13,14 +13,24 @@
                     今日のご飯はここだ!!
                 </h1>
                 <br>
-                <p th:text="${pref}"></p>
-                <p th:text="${area}"></p>
-                <!--API次第
-        なんの情報を得れて、なおかつ実装できるかってのが大事っすね〜-->
+                <p>--店名--</p>
+                <p th:text="${name}"></p>
+                <p>--住所名--</p>
+                <p th:text="${address}"></p>
+
+                <img th:src="@{photoURL}" width="230" height="460">
+
+        <br><br>
+        <form method="get" th:action="@{/RouletteDinner_home}">
+            <input type="submit" th:value="ホームに戻る">
+        </form>
+        <form method="get" th:action="@{/RouletteDinner_form}">
+            <input type="submit" th:value="検索条件を変更する">
+        </form>
                 <br><br><a href="http://webservice.recruit.co.jp/"><img
                         src="http://webservice.recruit.co.jp/banner/hotpepper-s.gif" alt="ホットペッパーグルメ Webサービス"
                         width="135" height="17" title="ホットペッパーグルメ Webサービス"></a>
             </div>
-        </body>
+</body>
 
 </html>
