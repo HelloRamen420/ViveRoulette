@@ -38,10 +38,10 @@ public class HomeController{
         JsonNode shopsNode = RandomController.kaesi(pref);
         String name = shopsNode.get("name").asText();
         String address = shopsNode.get("address").asText();
-        String photo = shopsNode.get("photo").get("pc").get("l").asText();
+        String photoURL = shopsNode.get("photo").get("pc").get("l").asText();
         mav.addObject("name", name);
         mav.addObject("address", address);
-        mav.addObject("photo", photo);
+        mav.addObject("photoURL", photoURL);
         mav.setViewName("result");
         return mav;
     }
