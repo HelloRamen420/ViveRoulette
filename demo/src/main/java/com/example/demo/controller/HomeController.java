@@ -40,6 +40,7 @@ public class HomeController{
         String address = shopsNode.get("address").asText();
         mav.addObject("name", name);
         mav.addObject("address", address);
+        mav.addObject("pic",0);
         mav.setViewName("result");
         return mav;
     }
