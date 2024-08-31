@@ -1,0 +1,10 @@
+.bg-full {
+        color : white;
+        font-size : 27px;
+        width: 100%;
+        height: 100vh;
+        background-image: url('https://github.com/HelloRamen420/okuken_hucku/blob/main/demo/src/main/resources/templates/pakutexture24_TP_V.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: right;
+        }
