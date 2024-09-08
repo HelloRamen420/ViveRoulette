@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.model.Restaurant;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -9,13 +10,13 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class RandomController {
-    public static JsonNode kaesi(String pref) throws Exception{
+    public static JsonNode kaesi(Restaurant res) throws Exception{
         OkHttpClient client = new OkHttpClient();
         ObjectMapper mapper = new ObjectMapper();
         JsonNode shopsNode =null;
         Random random = new Random();
         try {
-            String url = "https://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=a5c3c9fb001ca296&large_area=" + PrefController.prefecture(pref) + "&budget+codeB008&results_available&format=json";
+            String url = ManyControllers.urlMake(res);  //ただのURL 検索条件がいくつあるかとかによって変わるからね
             // リクエストの作成
 	  	    Request request = new Request.Builder().url(url).build();
             // レスポンスの取得
