@@ -79,6 +79,7 @@ public class ManyControllers {
 
     public static String prefecture(String pref) throws IOException {   //完成してます 都道府県のコード取るだけやし
         // リクエストを送るURLを定義する（Json形式に値を修正）
+        JsonNode shopsNode =null;
         String prefCode=null;
         String url = UrlConst.PREF_SEARCH;
         // http通信を行う
