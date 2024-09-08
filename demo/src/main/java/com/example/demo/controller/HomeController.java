@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.model.Restaurant;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,18 +31,24 @@ public class HomeController{
 
     @PostMapping("/RouletteDinner_res")
     public ModelAndView result(ModelAndView mav ,@RequestParam String pref) throws Exception{
+        Restaurant res=new Restaurant();
+
         if(pref.isEmpty()){ //空文字の時の処理
             mav.addObject("nullMes",NULLMESS);  //実際にはnullではなく空文字
             mav.setViewName("form");
             return mav;
         }
-        JsonNode shopsNode = RandomController.kaesi(pref);
-        String name = shopsNode.get("name").asText();
-        String address = shopsNode.get("address").asText();
-        String photoURL = shopsNode.get("photo").get("pc").get("l").asText();
+
+        //ここでレストランのオブジェクトに注ぎ込んでいきます(setするだけ)
+        res.setAreaPref(pref);
+
+        JsonNode shopsNode = RandomController.kaesi(res);
+
+        String name = shopsNode.get("results").get("shop").get(0).get("name").asText();
+        String address = shopsNode.get("results").get("shop").get(0).get("address").asText();
+
         mav.addObject("name", name);
         mav.addObject("address", address);
-        mav.addObject("photoURL", photoURL);
         mav.setViewName("result");
         return mav;
     }
