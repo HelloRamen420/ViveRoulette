@@ -16,6 +16,7 @@ import okhttp3.Response;
 
 public class ManyControllers {
 
+
     /*　~注意~
     * これは検索結果の件数を返すメソッドですが、
     *
@@ -70,39 +71,55 @@ public class ManyControllers {
             rootUrl+="&large_area="+prefecture(res.getAreaPref());
         }
 
-        //ランダムの処理っすねぇ
+        //ランダムの処理っすねぇ　一番最後じゃないといけません
         String resUrl=rootUrl+"&count=1&start="+(rm.nextInt(availableSearch(rootUrl))+1);
 
         return resUrl;
     }
 
 
-    public static String prefecture(String pref) throws IOException {   //完成してます 都道府県のコード取るだけやし
-        // リクエストを送るURLを定義する（Json形式に値を修正）
-        JsonNode shopsNode =null;
+
+    /*めっちゃ完成してます
+    * さすがにもう施すとこはないかと(フラグ)
+    *
+    * 都道府県のcode一覧みたいなとこからfor文いい感じに回してます
+    * まあそんなむずいことはしてないかなと
+    *
+    * ぜひ日本語で読んでみてください
+    * jsonの階層構造が把握できれば読めるはずです。*/
+
+    public static String prefecture(String pref) throws IOException {
+
         String prefCode=null;
         String url = UrlConst.PREF_SEARCH;
         // http通信を行う
         OkHttpClient client = new OkHttpClient();
         ObjectMapper mapper = new ObjectMapper();
-        // リクエストの作成
-        Request request = new Request.Builder().url(url).build();
-        // レスポンスの取得
-        Response response = client.newCall(request).execute();
-        // レスポンスのBody要素を取得
-        String responseBody = response.body().string();
-        JsonNode rootNode = mapper.readTree(responseBody);
+        try {
+
+            //いつもの
+            Request request = new Request.Builder().url(url).build();
+            Response response = client.newCall(request).execute();
+            String responseBody = response.body().string();
+            //ここまで
+
+            JsonNode rootNode = mapper.readTree(responseBody);
 
 
-        //都道府県の数(厳密にはjsonファイルに含まれる検索結果の数)が取得できるのでそれで回そうというやつ
-        for(int i=0;i<rootNode.get("results").get("results_returned").asInt();i++){
-            //ややこしく見えるけどやってることは、「引数の都道府県」と「検索結果を上からダァーっとひとつづつ取得」が同じですか？ってやつ
-            if(pref.equals(rootNode.get("results").get("large_area").get(i).get("name").asText())){
-                //シンプルに引数の都道府県と対応したcodeをin
-                prefCode=rootNode.get("results").get("large_area").get(i).get("code").asText();
-                break;
+            //都道府県の数(厳密にはjsonファイルに含まれる検索結果の数)が取得できるのでそれで回そうというやつ
+            for(int i=0;i<rootNode.get("results").get("results_returned").asInt();i++){
+                //ややこしく見えるけどやってることは、「引数の都道府県」と「検索結果を上からダァーっとひとつづつ取得」が同じですか？ってやつ
+                if(pref.equals(rootNode.get("results").get("large_area").get(i).get("name").asText())){
+                    //シンプルに引数の都道府県と対応したcodeをin
+                    prefCode=rootNode.get("results").get("large_area").get(i).get("code").asText();
+                    break;
+                }
             }
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
         return prefCode;
     }
 }

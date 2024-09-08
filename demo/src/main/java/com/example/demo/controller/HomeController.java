@@ -33,7 +33,7 @@ public class HomeController{
     public ModelAndView result(ModelAndView mav ,@RequestParam String pref) throws Exception{
         Restaurant res=new Restaurant();
 
-        if(pref.isEmpty()){ //空文字の時の処理
+        if(pref.isEmpty()){ //空文字の時の処理 都道府県は今のとこ必須ということで
             mav.addObject("nullMes",NULLMESS);  //実際にはnullではなく空文字
             mav.setViewName("form");
             return mav;
