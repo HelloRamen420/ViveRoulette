@@ -2,9 +2,11 @@ package com.example.demo.controller;
 
 import java.io.IOException;
 import java.util.Objects;
+import java.util.Random;
 
 import com.example.demo.model.Restaurant;
 import com.example.demo.model.UrlConst;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -13,6 +15,34 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class ManyControllers {
+
+    /*　~注意~
+    * これは検索結果の件数を返すメソッドですが、
+    *
+    * 取得したファイルに含まれる件数ではなく、
+    * 絞り込んだ結果それに当てはまった件数
+    *
+    * を返しています。
+    * 取得したファイルは当てはまった件数全部を表示しているわけではないので。*/
+
+    public static int availableSearch(String url) {
+        OkHttpClient client = new OkHttpClient();
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode shopsNode =null;
+        try {
+            // リクエストの作成
+            Request request = new Request.Builder().url(url).build();
+            // レスポンスの取得
+            Response response = client.newCall(request).execute();
+            // レスポンスのBody要素を取得
+            String responseBody = response.body().string();
+            shopsNode=mapper.readTree(responseBody);
+        }catch(IOException e) {
+            e.printStackTrace();
+        }
+        return shopsNode.get("results").get("results_available").asInt();
+    }
+
     public static String urlMake(Restaurant res) throws IOException {
         String rootUrl="https://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=a5c3c9fb001ca296&format=json";
         if(Objects.nonNull(res.getAreaPref())){

@@ -9,7 +9,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class RandomController {
+public class RandomController { //ランダムで取得するとはいえURLの時点でランダムやってます
     public static JsonNode kaesi(Restaurant res) throws Exception{
         OkHttpClient client = new OkHttpClient();
         ObjectMapper mapper = new ObjectMapper();
@@ -23,16 +23,7 @@ public class RandomController {
 	  	    Response response = client.newCall(request).execute();
             // レスポンスのBody要素を取得
 	  	    String responseBody = response.body().string();
-            JsonNode rootNode = mapper.readTree(responseBody);
-            int i = 0;
-            //json長さチェック
-            do {
-                shopsNode = rootNode.get("results").get("shop").get(i);
-                i++;
-            } while (shopsNode != null);
-            int randomValue = random.nextInt(i-1);
-            //乱数で店を指定
-            shopsNode = rootNode.get("results").get("shop").get(randomValue);
+            shopsNode = mapper.readTree(responseBody);
         }catch(JsonProcessingException e) {
             e.printStackTrace();
         }
