@@ -37,7 +37,9 @@ public class HomeController{
             mav.setViewName("form");
             return mav;
         }
+
         res.setAreaPref(pref);
+
         JsonNode shopsNode = RandomController.kaesi(res);
         String name = shopsNode.get("name").asText();
         String address = shopsNode.get("address").asText();
