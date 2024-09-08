@@ -30,12 +30,11 @@ public class ManyControllers {
         ObjectMapper mapper = new ObjectMapper();
         JsonNode shopsNode =null;
         try {
-            // リクエストの作成
+            //いつものセット
             Request request = new Request.Builder().url(url).build();
-            // レスポンスの取得
             Response response = client.newCall(request).execute();
-            // レスポンスのBody要素を取得
             String responseBody = response.body().string();
+            //ここまで
             shopsNode=mapper.readTree(responseBody);
         }catch(IOException e) {
             e.printStackTrace();
@@ -43,12 +42,38 @@ public class ManyControllers {
         return shopsNode.get("results").get("results_available").asInt();
     }
 
+
+
+
+    /*URLをつくるメソッドです。
+    *
+    * 何で絞るかUser任意なので、
+    * もうRestaurantオブジェクトの中身次第だね〜
+    * みたいにするとちゃちゃっとできることに気づきました。
+    *
+    * そんな複雑にはなってないはずです。
+    * フィールドの内容がnullだと何もしない、なんか入ってると対応したクエリをURLに追加するみたいな、
+    * あぁ〜シンプル
+    *
+    * ちなみに最後の処理は、
+    * その条件に当てはまる店の件数の中から一つを取得してるだけですね。
+    * こうやってしないといけないんです (ﾉД`)ｼｸｼｸ
+    * なんでか気になった人は @renkon100000 まで */
+
     public static String urlMake(Restaurant res) throws IOException {
+        Random rm=new Random();
         String rootUrl="https://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=a5c3c9fb001ca296&format=json";
+
+
+        //ここからがURLにいろいろつぎ込むとこっすねぇ
         if(Objects.nonNull(res.getAreaPref())){
             rootUrl+="&large_area="+prefecture(res.getAreaPref());
         }
-        return rootUrl;
+
+        //ランダムの処理っすねぇ
+        String resUrl=rootUrl+"&count=1&start="+(rm.nextInt(availableSearch(rootUrl))+1);
+
+        return resUrl;
     }
 
 
@@ -67,6 +92,7 @@ public class ManyControllers {
         // レスポンスのBody要素を取得
         String responseBody = response.body().string();
         JsonNode rootNode = mapper.readTree(responseBody);
+
 
         //都道府県の数(厳密にはjsonファイルに含まれる検索結果の数)が取得できるのでそれで回そうというやつ
         for(int i=0;i<rootNode.get("results").get("results_returned").asInt();i++){
