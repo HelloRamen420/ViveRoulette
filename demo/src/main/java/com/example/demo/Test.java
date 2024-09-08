@@ -16,13 +16,14 @@ public class Test { //何を取得するんかなとか　ライブラリ揃え�
         JsonNode shopsNode =null;
         Random random = new Random();
         try {
-            String url = "https://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=a5c3c9fb001ca296&large_area=Z014&budget+codeB008&results_available&format=json";
+            String url = "https://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=a5c3c9fb001ca296&large_area=Z014&format=json";
             // リクエストの作成
             Request request = new Request.Builder().url(url).build();
             // レスポンスの取得
             Response response = client.newCall(request).execute();
             // レスポンスのBody要素を取得
             String responseBody = response.body().string();
+            shopsNode=mapper.readTree(responseBody);
             System.out.println(responseBody);
         }catch(JsonProcessingException e) {
             e.printStackTrace();
