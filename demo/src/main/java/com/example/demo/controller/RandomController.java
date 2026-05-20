@@ -16,6 +16,9 @@ public class RandomController { //ランダムで取得するとはいえURLの�
         JsonNode shopsNode =null;
         try {
             String url = ManyControllers.urlMake(res);  //ただのURL 検索条件がいくつあるかとかによって変わるからね
+            if (url == null) {
+                return null;
+            }
 
 	  	    //いつもの
             Request request = new Request.Builder().url(url).build();

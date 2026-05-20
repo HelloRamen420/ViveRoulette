@@ -2,34 +2,79 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>ご飯どこ行こっかな_res</title>
+    <title>ご飯どこ行こっかな？ - ルーレット結果</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" th:href="@{../static/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 
 <body>
-    <div style="text-align:center">
-    <h1>
-        <br><br>
-                    今日のご飯はここだ!!
-                </h1>
-                <br>
-                <p>--店名--</p>
-                <p th:text="${name}"></p>
-                <p>--住所名--</p>
-                <p th:text="${address}"></p>
-
-        <br><br>
-        <form method="get" th:action="@{/RouletteDinner_home}">
-            <input type="submit" th:value="ホームに戻る">
-        </form>
-        <form method="get" th:action="@{/RouletteDinner_form}">
-            <input type="submit" th:value="検索条件を変更する">
-        </form>
-                <br><br><a href="http://webservice.recruit.co.jp/"><img
-                        src="http://webservice.recruit.co.jp/banner/hotpepper-s.gif" alt="ホットペッパーグルメ Webサービス"
-                        width="135" height="17" title="ホットペッパーグルメ Webサービス"></a>
+    <div class="container">
+        <h1>今日のご飯はここだ!!</h1>
+        
+        <!-- 店舗カード -->
+        <div class="result-card">
+            <h3 th:text="${restaurant.name}">店舗名</h3>
+            
+            <!-- 店舗画像 -->
+            <div class="shop-image-container" th:if="${restaurant.photoUrl}">
+                <img th:src="${restaurant.photoUrl}" alt="店舗画像" class="shop-image">
             </div>
+            
+            <!-- 住所 -->
+            <div class="info-row" th:if="${restaurant.adress}">
+                <div class="info-label">住所</div>
+                <div class="info-value" th:text="${restaurant.adress}">東京都中央区...</div>
+            </div>
+            
+            <!-- 電話番号 -->
+            <div class="info-row" th:if="${restaurant.tel}">
+                <div class="info-label">電話番号</div>
+                <div class="info-value">
+                    <a th:href="'tel:' + ${restaurant.tel}" th:text="${restaurant.tel}" class="tel-link">03-XXXX-XXXX</a>
+                </div>
+            </div>
+            
+            <!-- 営業時間 -->
+            <div class="info-row" th:if="${restaurant.openHours}">
+                <div class="info-label">営業時間</div>
+                <div class="info-value" th:text="${restaurant.openHours}">11:00～23:00</div>
+            </div>
+        </div>
+
+        <!-- ボタングループ -->
+        <div class="btn-action-group">
+            <!-- ホットペッパー詳細リンク -->
+            <a th:if="${restaurant.shopUrl}" th:href="${restaurant.shopUrl}" target="_blank" class="btn">ホットペッパーで見る</a>
+            
+            <!-- もう一度ルーレット（条件引き継ぎ） -->
+            <form method="post" th:action="@{/RouletteDinner_res}" style="margin: 0; display: inline;">
+                <input type="hidden" name="pref" th:value="${pref}">
+                <input type="hidden" name="area" th:value="${area}">
+                <input type="hidden" name="genre" th:value="${genre}">
+                <input type="hidden" name="budget" th:value="${budget}">
+                <input type="hidden" name="midnight" th:value="${midnight}">
+                <input type="hidden" name="nonSmoking" th:value="${nonSmoking}">
+                <input type="hidden" name="parking" th:value="${parking}">
+                <input type="hidden" name="privateRoom" th:value="${privateRoom}">
+                <input type="hidden" name="wifi" th:value="${wifi}">
+                <input type="hidden" name="child" th:value="${child}">
+                <input type="hidden" name="card" th:value="${card}">
+                <input type="hidden" name="lunch" th:value="${lunch}">
+                <input type="submit" class="btn" value="もう一度ルーレット！" style="background-color: #E65F00; border-bottom-color: #B34A00;">
+            </form>
+        </div>
+        
+        <div class="btn-action-group" style="margin-top: 15px;">
+            <a th:href="@{/RouletteDinner_form}" class="btn btn-sub" style="max-width: 250px;">条件を変える</a>
+            <a th:href="@{/RouletteDinner_home}" class="btn btn-sub" style="max-width: 250px;">ホームに戻る</a>
+        </div>
+        
+        <div class="api-logo">
+            <a href="http://webservice.recruit.co.jp/">
+                <img src="http://webservice.recruit.co.jp/banner/hotpepper-s.gif" alt="ホットペッパーグルメ Webサービス" width="135" height="17" border="0" title="ホットペッパーグルメ Webサービス">
+            </a>
+        </div>
+    </div>
 </body>
 
 </html>

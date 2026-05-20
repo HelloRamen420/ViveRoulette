@@ -3,26 +3,25 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>
-        ご飯どこ行こっかな？_home
-    </title>
-    <link th:href="@{../static/css/style.css}" rel="stylesheet">
+    <title>ご飯どこ行こっかな？ - ホーム</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet">
 </head>
 
 <body>
-    <div style="text-align:center">
-        <h1>
-            <br><br>
-            今日のご飯はどこにする？
-        </h1>
-        <br>
+    <div class="container">
+        <h1>今日のご飯はどこにする？</h1>
+        
+        <h2>近くのお店をランダムで決定！</h2>
+        
         <form method="get" th:action="@{/RouletteDinner_form}">
-
-            <input type="submit" value="決める！"></input>
+            <input type="submit" class="btn" value="決める！" />
         </form>
-        <br><br><a href="http://webservice.recruit.co.jp/"><img
-                src="http://webservice.recruit.co.jp/banner/hotpepper-s.gif" alt="ホットペッパーグルメ Webサービス" width="135"
-                height="17" border="0" title="ホットペッパーグルメ Webサービス"></a>
+        
+        <div class="api-logo">
+            <a href="http://webservice.recruit.co.jp/">
+                <img src="http://webservice.recruit.co.jp/banner/hotpepper-s.gif" alt="ホットペッパーグルメ Webサービス" width="135" height="17" border="0" title="ホットペッパーグルメ Webサービス">
+            </a>
+        </div>
     </div>
 </body>
 

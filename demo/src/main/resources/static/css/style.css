@@ -1,0 +1,289 @@
+/* ==========================================================================
+   ViveRoulette Style Sheet - Hot Pepper Gourmet Inspired (Friendly & Highly Visible)
+   ========================================================================== */
+
+/* 全体設定 */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+    background-color: #FFF9F5; /* 温かみのある極薄オレンジ */
+    color: #333333;
+    line-height: 1.6;
+    padding: 20px 10px;
+}
+
+/* メインコンテナ */
+.container {
+    max-width: 600px;
+    margin: 40px auto;
+    background-color: #FFFFFF;
+    border: 3px solid #FF7A00; /* ホットペッパーをイメージした極太オレンジ枠 */
+    border-radius: 12px;
+    padding: 30px 20px;
+    box-shadow: 0 4px 15px rgba(255, 122, 0, 0.1);
+    text-align: center;
+}
+
+/* ヘッダー */
+h1 {
+    color: #FF5B00; /* メインブランドカラー */
+    font-size: 28px;
+    margin-bottom: 25px;
+    border-bottom: 2px dashed #FFCDA0;
+    padding-bottom: 15px;
+    font-weight: bold;
+}
+
+h2 {
+    font-size: 20px;
+    color: #444444;
+    margin-bottom: 20px;
+}
+
+/* メッセージエリア */
+.error-message {
+    color: #D32F2F;
+    background-color: #FFEBEE;
+    border: 1px solid #FFCDD2;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    display: inline-block;
+}
+
+/* フォーム関連 */
+form {
+    margin: 20px 0;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+    max-width: 450px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #555555;
+    font-size: 15px;
+}
+
+.form-group select,
+.form-group input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 2px solid #DDDDDD;
+    border-radius: 6px;
+    background-color: #FAFAFA;
+    transition: border-color 0.2s;
+}
+
+.form-group select:focus,
+.form-group input[type="text"]:focus {
+    border-color: #FF7A00;
+    background-color: #FFFFFF;
+    outline: none;
+}
+
+/* チェックボックスグループ */
+.checkbox-group {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: #FFF0E5;
+    padding: 8px 12px;
+    border: 1px solid #FFCDA0;
+    border-radius: 20px;
+    font-size: 14px;
+    transition: background-color 0.2s;
+}
+
+.checkbox-label input {
+    margin-right: 6px;
+    transform: scale(1.2);
+}
+
+.checkbox-label:hover {
+    background-color: #FFE0CC;
+}
+
+/* ボタン */
+.btn {
+    display: inline-block;
+    width: 100%;
+    max-width: 300px;
+    padding: 15px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #FFFFFF;
+    background-color: #FF5B00; /* ホットペッパーオレンジ */
+    border: none;
+    border-bottom: 4px solid #D84D00;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.1s ease;
+    margin: 10px 5px;
+}
+
+.btn:hover {
+    background-color: #FF6C1A;
+    transform: translateY(1px);
+    border-bottom-width: 3px;
+}
+
+.btn:active {
+    transform: translateY(3px);
+    border-bottom-width: 1px;
+}
+
+.btn-sub {
+    background-color: #888888;
+    border-bottom-color: #666666;
+}
+
+.btn-sub:hover {
+    background-color: #999999;
+}
+
+.btn-action-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 25px;
+}
+
+/* 結果表示カード */
+.result-card {
+    background-color: #FFFDFB;
+    border: 2px solid #FFE0C5;
+    border-radius: 10px;
+    padding: 25px;
+    margin: 25px auto;
+    text-align: left;
+    max-width: 480px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.shop-image-container {
+    width: 100%;
+    margin-bottom: 20px;
+    text-align: center;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #FFE0C5;
+    background-color: #EEEEEE;
+}
+
+.shop-image {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+.result-card h3 {
+    font-size: 22px;
+    color: #D84D00;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #FF7A00;
+    padding-bottom: 8px;
+    font-weight: bold;
+}
+
+.info-row {
+    margin-bottom: 12px;
+    display: flex;
+    flex-direction: column;
+}
+
+.info-label {
+    font-weight: bold;
+    font-size: 13px;
+    color: #777777;
+    margin-bottom: 2px;
+}
+
+.info-value {
+    font-size: 16px;
+    color: #333333;
+}
+
+.tel-link {
+    color: #FF5B00;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.tel-link:hover {
+    color: #D84D00;
+}
+
+/* コピーライト/API表記 */
+.api-logo {
+    margin-top: 30px;
+    border-top: 1px solid #EEEEEE;
+    padding-top: 20px;
+}
+
+.api-logo img {
+    opacity: 0.8;
+    transition: opacity 0.2s;
+}
+
+.api-logo img:hover {
+    opacity: 1;
+}
+
+/* レスポンシブ対応 */
+@media (min-width: 480px) {
+    .container {
+        padding: 40px 30px;
+    }
+    
+    .info-row {
+        flex-direction: row;
+        align-items: baseline;
+    }
+    
+    .info-label {
+        width: 100px;
+        min-width: 100px;
+        margin-bottom: 0;
+    }
+    
+    .info-value {
+        flex-grow: 1;
+    }
+    
+    .btn-action-group {
+        flex-direction: row;
+        justify-content: center;
+    }
+    
+    .btn {
+        width: auto;
+        min-width: 200px;
+    }
+}

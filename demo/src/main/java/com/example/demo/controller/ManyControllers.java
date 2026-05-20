@@ -65,14 +65,78 @@ public class ManyControllers {
         Random rm=new Random();
         String rootUrl="https://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=a5c3c9fb001ca296&format=json";
 
-
-        //ここからがURLにいろいろつぎ込むとこっすねぇ
-        if(Objects.nonNull(res.getAreaPref())){
-            rootUrl+="&large_area="+prefecture(res.getAreaPref());
+        // 都道府県
+        if(Objects.nonNull(res.getAreaPref()) && !res.getAreaPref().isEmpty()){
+            String prefCode = prefecture(res.getAreaPref());
+            if (prefCode != null) {
+                rootUrl += "&large_area=" + prefCode;
+            }
         }
 
-        //ランダムの処理っすねぇ　一番最後じゃないといけません
-        String resUrl=rootUrl+"&count=1&start="+(rm.nextInt(availableSearch(rootUrl))+1);
+        // フリーワード / 地域キーワード
+        if(Objects.nonNull(res.getKeyword()) && !res.getKeyword().isEmpty()){
+            rootUrl += "&keyword=" + java.net.URLEncoder.encode(res.getKeyword(), "UTF-8");
+        }
+
+        // ジャンル
+        if(Objects.nonNull(res.getGenre()) && !res.getGenre().isEmpty()){
+            rootUrl += "&genre=" + res.getGenre();
+        }
+
+        // 予算
+        if(Objects.nonNull(res.getBudgetCode()) && !res.getBudgetCode().isEmpty()){
+            rootUrl += "&budget=" + res.getBudgetCode();
+        }
+
+        // 深夜営業あり
+        if(Objects.nonNull(res.getMidnight()) && "1".equals(res.getMidnight())){
+            rootUrl += "&midnight=1";
+        }
+
+        // 禁煙席あり
+        if(Objects.nonNull(res.getNonSmoking()) && "1".equals(res.getNonSmoking())){
+            rootUrl += "&non_smoking=1";
+        }
+
+        // 駐車場あり
+        if(Objects.nonNull(res.getParking()) && "1".equals(res.getParking())){
+            rootUrl += "&parking=1";
+        }
+
+        // 個室あり
+        if(Objects.nonNull(res.getPrivateRoom()) && "1".equals(res.getPrivateRoom())){
+            rootUrl += "&private_room=1";
+        }
+
+        // WiFiあり
+        if(Objects.nonNull(res.getWifi()) && "1".equals(res.getWifi())){
+            rootUrl += "&wifi=1";
+        }
+
+        // お子様連れ歓迎
+        if(Objects.nonNull(res.getChild()) && "1".equals(res.getChild())){
+            rootUrl += "&child=1";
+        }
+
+        // カード利用可
+        if(Objects.nonNull(res.getCard()) && "1".equals(res.getCard())){
+            rootUrl += "&card=1";
+        }
+
+        // ランチあり
+        if(Objects.nonNull(res.getLunch()) && "1".equals(res.getLunch())){
+            rootUrl += "&lunch=1";
+        }
+
+        // 全件数を確認
+        int available = availableSearch(rootUrl);
+        if (available <= 0) {
+            return null; // 条件に合うお店がない場合はnullを返す
+        }
+
+        // ランダムの処理（全件数の中から1件だけランダムな位置のデータを取得）
+        int startPos = rm.nextInt(available) + 1;
+        String resUrl = rootUrl + "&count=1&start=" + startPos;
 
         return resUrl;
     }
@@ -86,7 +150,7 @@ public class ManyControllers {
     * まあそんなむずいことはしてないかなと
     *
     * ぜひ日本語で読んでみてください
-    * jsonの階層構造が把握できれば読めるはずです。*/
+    * jsonの階層構造が把握できればx読めるはずです。*/
 
     public static String prefecture(String pref) throws IOException {
 

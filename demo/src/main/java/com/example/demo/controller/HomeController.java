@@ -30,25 +30,107 @@ public class HomeController{
     }
 
     @PostMapping("/RouletteDinner_res")
-    public ModelAndView result(ModelAndView mav ,@RequestParam String pref) throws Exception{
-        Restaurant res=new Restaurant();
+    public ModelAndView result(
+            ModelAndView mav,
+            @RequestParam(required = false, defaultValue = "") String pref,
+            @RequestParam(required = false, defaultValue = "") String area,
+            @RequestParam(required = false, defaultValue = "") String genre,
+            @RequestParam(required = false, defaultValue = "") String budget,
+            @RequestParam(required = false, defaultValue = "") String midnight,
+            @RequestParam(required = false, defaultValue = "") String nonSmoking,
+            @RequestParam(required = false, defaultValue = "") String parking,
+            @RequestParam(required = false, defaultValue = "") String privateRoom,
+            @RequestParam(required = false, defaultValue = "") String wifi,
+            @RequestParam(required = false, defaultValue = "") String child,
+            @RequestParam(required = false, defaultValue = "") String card,
+            @RequestParam(required = false, defaultValue = "") String lunch) throws Exception {
 
-        if(pref.isEmpty()){ //空文字の時の処理 都道府県は今のとこ必須ということで
-            mav.addObject("nullMes",NULLMESS);  //実際にはnullではなく空文字
+        if(pref.isEmpty()){ // 都道府県は必須
+            mav.addObject("nullMes", NULLMESS);
             mav.setViewName("form");
             return mav;
         }
 
-        //ここでレストランのオブジェクトに注ぎ込んでいきます(setするだけ)
-        res.setAreaPref(pref);
+        Restaurant searchCriteria = new Restaurant();
+        searchCriteria.setAreaPref(pref);
+        searchCriteria.setKeyword(area);
+        searchCriteria.setGenre(genre);
+        searchCriteria.setBudgetCode(budget);
+        searchCriteria.setMidnight(midnight);
+        searchCriteria.setNonSmoking(nonSmoking);
+        searchCriteria.setParking(parking);
+        searchCriteria.setPrivateRoom(privateRoom);
+        searchCriteria.setWifi(wifi);
+        searchCriteria.setChild(child);
+        searchCriteria.setCard(card);
+        searchCriteria.setLunch(lunch);
 
-        JsonNode shopsNode = RandomController.kaesi(res);
+        JsonNode shopsNode = RandomController.kaesi(searchCriteria);
 
-        String name = shopsNode.get("results").get("shop").get(0).get("name").asText();
-        String address = shopsNode.get("results").get("shop").get(0).get("address").asText();
+        // 条件に合う店舗がなかった場合
+        if (shopsNode == null || 
+            !shopsNode.has("results") || 
+            !shopsNode.get("results").has("shop") || 
+            shopsNode.get("results").get("shop").size() == 0) {
+            
+            mav.addObject("nullMes", "該当するお店が見つかりませんでした。条件を変更してもう一度お試しください。");
+            // フォームに入力値を残すためにパラメータも戻す
+            mav.addObject("pref", pref);
+            mav.addObject("area", area);
+            mav.addObject("genre", genre);
+            mav.addObject("budget", budget);
+            mav.addObject("midnight", midnight);
+            mav.addObject("nonSmoking", nonSmoking);
+            mav.addObject("parking", parking);
+            mav.addObject("privateRoom", privateRoom);
+            mav.addObject("wifi", wifi);
+            mav.addObject("child", child);
+            mav.addObject("card", card);
+            mav.addObject("lunch", lunch);
+            mav.setViewName("form");
+            return mav;
+        }
 
-        mav.addObject("name", name);
-        mav.addObject("address", address);
+        // 1件目の店舗ノードを取得
+        JsonNode shopNode = shopsNode.get("results").get("shop").get(0);
+
+        Restaurant resultRestaurant = new Restaurant();
+        resultRestaurant.setName(shopNode.get("name").asText());
+        resultRestaurant.setAdress(shopNode.get("address").asText());
+        
+        if (shopNode.has("tel")) {
+            resultRestaurant.setTel(shopNode.get("tel").asText());
+        }
+        
+        if (shopNode.has("photo") && shopNode.get("photo").has("pc") && shopNode.get("photo").get("pc").has("l")) {
+            resultRestaurant.setPhotoUrl(shopNode.get("photo").get("pc").get("l").asText());
+        }
+        
+        if (shopNode.has("urls") && shopNode.get("urls").has("pc")) {
+            resultRestaurant.setShopUrl(shopNode.get("urls").get("pc").asText());
+        }
+        
+        if (shopNode.has("open")) {
+            resultRestaurant.setOpenHours(shopNode.get("open").asText());
+        }
+
+        // ビューにオブジェクトを渡す
+        mav.addObject("restaurant", resultRestaurant);
+        
+        // 検索パラメータをそのまま引き渡す（もう一度ルーレット用）
+        mav.addObject("pref", pref);
+        mav.addObject("area", area);
+        mav.addObject("genre", genre);
+        mav.addObject("budget", budget);
+        mav.addObject("midnight", midnight);
+        mav.addObject("nonSmoking", nonSmoking);
+        mav.addObject("parking", parking);
+        mav.addObject("privateRoom", privateRoom);
+        mav.addObject("wifi", wifi);
+        mav.addObject("child", child);
+        mav.addObject("card", card);
+        mav.addObject("lunch", lunch);
+        
         mav.setViewName("result");
         return mav;
     }
