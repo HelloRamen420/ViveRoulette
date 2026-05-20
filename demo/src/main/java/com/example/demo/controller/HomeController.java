@@ -19,6 +19,11 @@ import okhttp3.Response;
 public class HomeController{
     final static String NULLMESS="必要な情報を入力してください";
 
+    @GetMapping("/")
+    public String root(){
+        return "redirect:/RouletteDinner_home";
+    }
+
     @GetMapping("/RouletteDinner_home")    //一番最初に起動するやつ
     public String start(){
         return "home";
